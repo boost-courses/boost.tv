@@ -1,0 +1,6 @@
+{
+  "name": "boost.tv",
+  "identifier": "com.domain.app.boosttv",
+  "version": "1.0.0",
+  "icon": "./static/icon.png"
+}
