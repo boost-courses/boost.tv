@@ -19,15 +19,33 @@
 
 import { Router, Utils } from "@lightningjs/sdk";
 import routerConfig from "./lib/routerConfig";
+import { Menu } from "./widgets";
+import GridLayout from "./widgets/GridLayout";
 
 export default class App extends Router.App {
   static getFonts() {
-    return [{ family: "Regular", url: Utils.asset("fonts/Roboto-Regular.ttf") }];
+    return [
+      { family: "Regular", url: Utils.asset("fonts/etica-regular.ttf") },
+      { family: "Book", url: Utils.asset("fonts/etica-book.ttf") },
+      { family: "Bold", url: Utils.asset("fonts/etica-bold.ttf") },
+      { family: "Semibold", url: Utils.asset("fonts/etica-semibold.ttf") },
+    ];
   }
 
   static _template() {
     return {
       ...super._template(),
+      Widgets: {
+        Menu: {
+          type: Menu,
+          visible: true,
+          x: -Menu.menuWidth,
+        },
+        Grid: {
+          type: GridLayout,
+          alpha: 0,
+        },
+      },
     };
   }
 

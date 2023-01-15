@@ -16,10 +16,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Lightning } from "@lightningjs/sdk";
+import { Lightning, Router } from "@lightningjs/sdk";
 
 export default class Main extends Lightning.Component {
   static _template() {
     return {};
+  }
+
+  _handleLeft() {
+    Router.focusWidget("menu");
   }
 }

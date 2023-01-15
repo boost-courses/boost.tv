@@ -18,14 +18,68 @@
 
 import { Main, Splash } from "../pages";
 
+export const pathNames = {
+  HOME: "home",
+  SEARCH: "search",
+  TV: "tv",
+  MOVIES: "movies",
+  SERIES: "series",
+  KIDS: "kids",
+  CHANNELS: "channels",
+  PROFILE: "profile",
+  SETTINGS: "settings",
+};
+
 const routes = [
   {
-    path: "home",
+    path: pathNames.SEARCH,
     component: Main,
+    widgets: ["Menu", "Grid"],
+  },
+  {
+    path: pathNames.TV,
+    component: Main,
+    widgets: ["Menu", "Grid"],
+  },
+  {
+    path: pathNames.MOVIES,
+    component: Main,
+    widgets: ["Menu", "Grid"],
+  },
+  {
+    path: pathNames.SERIES,
+    component: Main,
+    widgets: ["Menu", "Grid"],
+  },
+  {
+    path: pathNames.KIDS,
+    component: Main,
+    widgets: ["Menu", "Grid"],
+  },
+  {
+    path: pathNames.CHANNELS,
+    component: Main,
+    widgets: ["Menu", "Grid"],
+  },
+  {
+    path: pathNames.PROFILE,
+    component: Main,
+    widgets: ["Menu", "Grid"],
+  },
+  {
+    path: pathNames.SETTINGS,
+    component: Main,
+    widgets: ["Menu", "Grid"],
+  },
+  {
+    path: pathNames.HOME,
+    component: Main,
+    widgets: ["Menu", "Grid"],
   },
   {
     path: "$",
     component: Splash,
+    widgets: ["Grid"],
   },
 ];
 
