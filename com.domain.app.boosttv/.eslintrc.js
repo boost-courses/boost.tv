@@ -24,7 +24,6 @@ module.exports = {
         singleQuote: false,
         tabWidth: 2,
         semi: true,
-        printWidth: 100,
         parser: "flow",
       },
     ],

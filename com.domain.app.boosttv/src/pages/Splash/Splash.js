@@ -17,15 +17,13 @@
  */
 
 import { Lightning, Router, Utils } from "@lightningjs/sdk";
+import { PageBackground } from "../../components";
 
 export default class Splash extends Lightning.Component {
   static _template() {
     return {
       Background: {
-        w: 1920,
-        h: 1080,
-        color: 0xfffbb03b,
-        src: Utils.asset("images/background.png"),
+        type: PageBackground,
       },
     };
   }

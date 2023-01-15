@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Main, Splash } from "../pages";
+import { Main, Settings, Splash } from "../pages";
 
 export const pathNames = {
   HOME: "home",
@@ -68,7 +68,7 @@ const routes = [
   },
   {
     path: pathNames.SETTINGS,
-    component: Main,
+    component: Settings,
     widgets: ["Menu", "Grid"],
   },
   {

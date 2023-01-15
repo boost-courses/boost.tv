@@ -3,7 +3,7 @@
  * SDK version: 5.2.0
  * CLI version: 2.9.1
  *
- * Generated: Sun, 15 Jan 2023 13:23:08 GMT
+ * Generated: Sun, 15 Jan 2023 21:11:03 GMT
  */
 
 var APP_com_domain_app_boosttv = (function () {
@@ -48,7 +48,7 @@ var APP_com_domain_app_boosttv = (function () {
     }
     return typeof obj === 'object' && obj !== null ? Object.keys(obj).length ? obj : undefined : obj;
   };
-  var Settings$1 = {
+  var Settings$2 = {
     get(type, key) {
       let fallback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
       const val = dotGrab(settings[type], key);
@@ -112,16 +112,16 @@ var APP_com_domain_app_boosttv = (function () {
   };
   var Log$1 = {
     info() {
-      Settings$1.get('platform', 'log') && console.log.apply(console, prepLog('Info', arguments));
+      Settings$2.get('platform', 'log') && console.log.apply(console, prepLog('Info', arguments));
     },
     debug() {
-      Settings$1.get('platform', 'log') && console.debug.apply(console, prepLog('Debug', arguments));
+      Settings$2.get('platform', 'log') && console.debug.apply(console, prepLog('Debug', arguments));
     },
     error() {
-      Settings$1.get('platform', 'log') && console.error.apply(console, prepLog('Error', arguments));
+      Settings$2.get('platform', 'log') && console.error.apply(console, prepLog('Error', arguments));
     },
     warn() {
-      Settings$1.get('platform', 'log') && console.warn.apply(console, prepLog('Warn', arguments));
+      Settings$2.get('platform', 'log') && console.warn.apply(console, prepLog('Warn', arguments));
     }
   };
 
@@ -410,7 +410,7 @@ var APP_com_domain_app_boosttv = (function () {
    */
 
   let Log;
-  let Settings;
+  let Settings$1;
   let ApplicationInstance$1;
   let Ads$1;
   let Lightning;
@@ -419,7 +419,7 @@ var APP_com_domain_app_boosttv = (function () {
       Log = v;
     },
     set settings(v) {
-      Settings = v;
+      Settings$1 = v;
     },
     set ads(v) {
       Ads$1 = v;
@@ -573,7 +573,7 @@ var APP_com_domain_app_boosttv = (function () {
   const hasOrAskForGeoLocationPermission = () => {
     return new Promise(resolve => {
       // force to prompt for location permission
-      if (Settings.get('platform', 'forceBrowserGeolocation') === true) resolve(true);
+      if (Settings$1.get('platform', 'forceBrowserGeolocation') === true) resolve(true);
       if ('permissions' in navigator && typeof navigator.permissions.query === 'function') {
         navigator.permissions.query({
           name: 'geolocation'
@@ -679,7 +679,7 @@ var APP_com_domain_app_boosttv = (function () {
   let getInfo = key => {
     const profile = {
       ...defaultProfile,
-      ...Settings.get('platform', 'profile')
+      ...Settings$1.get('platform', 'profile')
     };
     return Promise.resolve(typeof profile[key] === 'function' ? profile[key]() : profile[key]);
   };
@@ -774,7 +774,7 @@ var APP_com_domain_app_boosttv = (function () {
       ageRating: 10
     }
   }];
-  const channels = () => Settings.get('platform', 'tv', defaultChannels);
+  const channels = () => Settings$1.get('platform', 'tv', defaultChannels);
   const randomChannel = () => channels()[~~(channels.length * Math.random())];
 
   /*
@@ -1294,8 +1294,8 @@ var APP_com_domain_app_boosttv = (function () {
       return videoEls[0];
     } else {
       const videoEl = document.createElement('video');
-      const platformSettingsWidth = Settings.get('platform', 'width') ? Settings.get('platform', 'width') : 1920;
-      const platformSettingsHeight = Settings.get('platform', 'height') ? Settings.get('platform', 'height') : 1080;
+      const platformSettingsWidth = Settings$1.get('platform', 'width') ? Settings$1.get('platform', 'width') : 1920;
+      const platformSettingsHeight = Settings$1.get('platform', 'height') ? Settings$1.get('platform', 'height') : 1080;
       videoEl.setAttribute('id', 'video-player');
       videoEl.setAttribute('width', withPrecision(platformSettingsWidth));
       videoEl.setAttribute('height', withPrecision(platformSettingsHeight));
@@ -1596,7 +1596,7 @@ var APP_com_domain_app_boosttv = (function () {
   autoSetupMixin(videoPlayerPlugin, () => {
     precision = ApplicationInstance$1 && ApplicationInstance$1.stage && ApplicationInstance$1.stage.getRenderPrecision() || precision;
     videoEl = setupVideoTag();
-    textureMode = Settings.get('platform', 'textureMode', false);
+    textureMode = Settings$1.get('platform', 'textureMode', false);
     if (textureMode === true) {
       videoEl.setAttribute('crossorigin', 'anonymous');
       videoTexture = setUpVideoTexture();
@@ -2172,7 +2172,7 @@ var APP_com_domain_app_boosttv = (function () {
           interval: 500,
           threshold: 1
         },
-        ...Settings$1.get('platform', 'showFps')
+        ...Settings$2.get('platform', 'showFps')
       };
       this.fps = 0;
       this.lastFps = this.fps - this.config.threshold;
@@ -2840,7 +2840,7 @@ var APP_com_domain_app_boosttv = (function () {
       }
       close() {
         Log$1.info('Closing App');
-        Settings$1.clearSubscribers();
+        Settings$2.clearSubscribers();
         Registry.clear();
         this.childList.remove(this.tag('App'));
         this.cleanupFonts();
@@ -2954,7 +2954,7 @@ var APP_com_domain_app_boosttv = (function () {
     _construct() {
       this._skipRenderToTexture = false;
       this._metrics = null;
-      this._textureMode = Settings$1.get('platform', 'textureMode') || false;
+      this._textureMode = Settings$2.get('platform', 'textureMode') || false;
       Log$1.info('Texture mode: ' + this._textureMode);
       console.warn(["The 'MediaPlayer'-plugin in the Lightning-SDK is deprecated and will be removed in future releases.", "Please consider using the new 'VideoPlayer'-plugin instead.", 'https://rdkcentral.github.io/Lightning-SDK/#/plugins/videoplayer'].join('\n\n'));
     }
@@ -3133,7 +3133,7 @@ var APP_com_domain_app_boosttv = (function () {
         } else if (settings.stream && settings.stream.src) {
           // This is here to be backwards compatible, will be removed
           // in future sdk release
-          if (Settings$1.get('app', 'hls')) {
+          if (Settings$2.get('app', 'hls')) {
             if (!window.Hls) {
               window.Hls = class Hls {
                 static isSupported() {
@@ -3460,7 +3460,7 @@ var APP_com_domain_app_boosttv = (function () {
    * limitations under the License.
    */
   const initStorage = () => {
-    Settings$1.get('platform', 'id');
+    Settings$2.get('platform', 'id');
     // todo: pass options (for example to force the use of cookies)
     new localCookie();
   };
@@ -4735,10 +4735,10 @@ var APP_com_domain_app_boosttv = (function () {
     return hash.replace(/^#/, '').replace(/\/+$/, '');
   };
   const getConfigMap = () => {
-    const routerSettings = Settings$1.get('platform', 'router');
+    const routerSettings = Settings$2.get('platform', 'router');
     const isObj = isObject(routerSettings);
     return ['backtrack', 'gcOnUnload', 'destroyOnHistoryBack', 'lazyCreate', 'lazyDestroy', 'reuseInstance', 'autoRestoreRemote', 'numberNavigation', 'updateHash', 'storeSameHash'].reduce((config, key) => {
-      config.set(key, isObj ? routerSettings[key] : Settings$1.get('platform', key));
+      config.set(key, isObj ? routerSettings[key] : Settings$2.get('platform', key));
       return config;
     }, new Map());
   };
@@ -5979,7 +5979,7 @@ var APP_com_domain_app_boosttv = (function () {
     }
     const app = Application(App, appData, platformSettings);
     initLightningSdkPlugin.log = Log$1;
-    initLightningSdkPlugin.settings = Settings$1;
+    initLightningSdkPlugin.settings = Settings$2;
     initLightningSdkPlugin.ads = Ads;
     initLightningSdkPlugin.lightning = Lightning$1;
     ApplicationInstance = new app(appSettings);
@@ -5987,140 +5987,109 @@ var APP_com_domain_app_boosttv = (function () {
     return ApplicationInstance;
   });
 
-  /**
-   * Copyright 2021 Comcast Cable Communications Management, LLC
-   *
-   * Licensed under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License.
-   * You may obtain a copy of the License at
-   *
-   * http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software
-   * distributed under the License is distributed on an "AS IS" BASIS,
-   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   * See the License for the specific language governing permissions and
-   * limitations under the License.
-   *
-   * SPDX-License-Identifier: Apache-2.0
-   */
-  class Splash extends Lightning$1.Component {
+  let gridSize = 20;
+  const gridWidth = 1920 / gridSize;
+  const gridHeight = 1080 / gridSize;
+  class GridLayout extends Lightning$1.Component {
     static _template() {
       return {
-        Background: {
-          w: 1920,
-          h: 1080,
-          color: 0xfffbb03b,
-          src: Utils.asset("images/background.png")
+        GridItems: {
+          w: gridSize * gridWidth,
+          h: gridSize * gridWidth,
+          x: 0,
+          y: 0
         }
       };
     }
-    _init() {
-      setTimeout(() => {
-        Router.resume();
-      }, 1000);
+    _setup() {
+      let gridNodes = [];
+      for (let i = 0; i < gridSize; i++) {
+        gridNodes.push({
+          type: GridItemVertical,
+          i
+        });
+        gridNodes.push({
+          type: GridItemHorisontal,
+          i
+        });
+      }
+      this.tag("GridItems").children = gridNodes;
     }
   }
-
-  /**
-   * Copyright 2021 Comcast Cable Communications Management, LLC
-   *
-   * Licensed under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License.
-   * You may obtain a copy of the License at
-   *
-   * http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software
-   * distributed under the License is distributed on an "AS IS" BASIS,
-   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   * See the License for the specific language governing permissions and
-   * limitations under the License.
-   *
-   * SPDX-License-Identifier: Apache-2.0
-   */
-  class Main extends Lightning$1.Component {
+  class GridItemVertical extends Lightning$1.Component {
     static _template() {
-      return {};
+      return {
+        w: 1,
+        h: 1080,
+        color: 0xff39ff14,
+        rect: true
+      };
     }
-    _handleLeft() {
-      Router.focusWidget("menu");
+    _setup() {
+      this.patch({
+        x: (this.i + 1) * gridWidth
+      });
+    }
+  }
+  class GridItemHorisontal extends Lightning$1.Component {
+    static _template() {
+      return {
+        w: 1920,
+        h: 1,
+        color: 0xff39ff14,
+        rect: true
+      };
+    }
+    _setup() {
+      this.patch({
+        y: (this.i + 1) * gridHeight
+      });
     }
   }
 
-  /**
-   * Copyright 2021 Comcast Cable Communications Management, LLC
-   *
-   * Licensed under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License.
-   * You may obtain a copy of the License at
-   *
-   * http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing, software
-   * distributed under the License is distributed on an "AS IS" BASIS,
-   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   * See the License for the specific language governing permissions and
-   * limitations under the License.
-   *
-   * SPDX-License-Identifier: Apache-2.0
-   */
-  const pathNames = {
-    HOME: "home",
-    SEARCH: "search",
-    TV: "tv",
-    MOVIES: "movies",
-    SERIES: "series",
-    KIDS: "kids",
-    CHANNELS: "channels",
-    PROFILE: "profile",
-    SETTINGS: "settings"
-  };
-  const routes = [{
-    path: pathNames.SEARCH,
-    component: Main,
-    widgets: ["Menu", "Grid"]
-  }, {
-    path: pathNames.TV,
-    component: Main,
-    widgets: ["Menu", "Grid"]
-  }, {
-    path: pathNames.MOVIES,
-    component: Main,
-    widgets: ["Menu", "Grid"]
-  }, {
-    path: pathNames.SERIES,
-    component: Main,
-    widgets: ["Menu", "Grid"]
-  }, {
-    path: pathNames.KIDS,
-    component: Main,
-    widgets: ["Menu", "Grid"]
-  }, {
-    path: pathNames.CHANNELS,
-    component: Main,
-    widgets: ["Menu", "Grid"]
-  }, {
-    path: pathNames.PROFILE,
-    component: Main,
-    widgets: ["Menu", "Grid"]
-  }, {
-    path: pathNames.SETTINGS,
-    component: Main,
-    widgets: ["Menu", "Grid"]
-  }, {
-    path: pathNames.HOME,
-    component: Main,
-    widgets: ["Menu", "Grid"]
-  }, {
-    path: "$",
-    component: Splash,
-    widgets: ["Grid"]
-  }];
-  var routerConfig = {
-    root: routes[0].path,
-    routes
-  };
+  class PageBackground extends Lightning$1.Component {
+    static _template() {
+      return {
+        w: 20 * gridWidth,
+        h: 20 * gridHeight,
+        color: 0xff131313,
+        rect: true
+      };
+    }
+  }
+
+  class Logo extends Lightning$1.Component {
+    static _template() {
+      return {
+        w: 2 * gridWidth,
+        h: 2 * gridHeight,
+        x: gridWidth,
+        y: gridHeight,
+        children: {
+          LogoImage: {
+            w: 2 * gridWidth,
+            h: 1 * gridHeight,
+            x: 0,
+            y: 0,
+            src: Utils.asset("images/logo.png")
+          },
+          DateAndTime: {
+            h: 1 * gridHeight,
+            w: 2 * gridWidth,
+            x: 0,
+            y: 1 * gridHeight,
+            text: {
+              text: "Friday | 13:23",
+              lineHeight: gridHeight,
+              fontSize: 26,
+              fontFace: "Semibold",
+              verticalAlign: "middle"
+            }
+          }
+        }
+      };
+    }
+  }
 
   /*
    * If not stated otherwise in this file or this component's LICENSE file the
@@ -6926,6 +6895,325 @@ var APP_com_domain_app_boosttv = (function () {
     }
     return -1;
   };
+
+  /*
+   * If not stated otherwise in this file or this component's LICENSE file the
+   * following copyright and licenses apply:
+   *
+   * Copyright 2021 Metrological
+   *
+   * Licensed under the Apache License, Version 2.0 (the License);
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   * http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   */
+  class Grid extends CollectionWrapper {
+    _construct() {
+      this._crossSpacing = 5;
+      this._mainSpacing = 5;
+      this._rows = 0;
+      this._columns = 0;
+      super._construct();
+    }
+    clear() {
+      super.clear();
+      this._mainIndex = 0;
+      this._crossIndex = 0;
+      this._previous = undefined;
+    }
+    setIndex(index) {
+      const targetIndex = limitWithinRange(index, 0, this._items.length - 1);
+      const previousIndex = this._index;
+      const {
+        mainIndex: previousMainIndex,
+        crossIndex: previousCrossIndex
+      } = this._findLocationOfIndex(this._index);
+      const {
+        mainIndex,
+        crossIndex
+      } = this._findLocationOfIndex(targetIndex);
+      this._mainIndex = mainIndex;
+      this._crossIndex = crossIndex;
+      this._previous = {
+        mainIndex,
+        crossIndex,
+        realIndex: previousIndex
+      };
+      this._index = targetIndex;
+      this._indexChanged({
+        previousIndex,
+        index: targetIndex,
+        mainIndex,
+        previousMainIndex,
+        crossIndex,
+        previousCrossIndex,
+        lines: this._lines.length,
+        dataLength: this._items.length
+      });
+    }
+    _findLocationOfIndex(index) {
+      for (let i = 0; i < this._lines.length; i++) {
+        if (this._lines[i].includes(index)) {
+          return {
+            mainIndex: i,
+            crossIndex: this._lines[i].indexOf(index)
+          };
+        }
+      }
+      return {
+        mainIndex: -1,
+        crossIndex: -1
+      };
+    }
+    plotItems() {
+      const items = this._items;
+      const wrapper = this.wrapper;
+      const {
+        directionIsRow,
+        mainDirection,
+        main,
+        mainDim,
+        mainMarginTo,
+        mainMarginFrom,
+        cross,
+        crossDim,
+        crossMarginTo,
+        crossMarginFrom
+      } = this._getPlotProperties(this._direction);
+      const crossSize = this[crossDim];
+      let mainPos = 0,
+        crossPos = 0,
+        lineIndex = 0;
+      const animateItems = [];
+      const viewboundMain = directionIsRow ? 1920 : 1080;
+      const viewboundCross = directionIsRow ? 1080 : 1920;
+      const renderContext = this.core.renderContext;
+      this._lines = [[]];
+      //create empty line array
+      let cl = [];
+      const newChildren = items.map((item, index) => {
+        const sizes = this._getItemSizes(item);
+        const targetCrossFromMargin = sizes[crossMarginFrom] || sizes.margin || 0;
+        if (index === 0) {
+          mainPos += sizes[mainMarginFrom] || sizes.margin || 0;
+        }
+        if (cl.length > 0 && (this[mainDirection] > 0 && this[mainDirection] === cl.length || this[mainDirection] === 0 && crossPos + targetCrossFromMargin + sizes[crossDim] > crossSize)) {
+          const bil = this._getBiggestInLine(cl);
+          mainPos = bil[main] + bil[mainDim] + (bil[mainMarginTo] || bil.margin || this._mainSpacing);
+          crossPos = targetCrossFromMargin;
+          this._lines.push([]);
+          cl = [];
+          lineIndex++;
+        } else {
+          crossPos += targetCrossFromMargin;
+        }
+        const ref = "IW-".concat(item.assignedID);
+        let tmp = mainPos;
+        let tcp = crossPos;
+        const existingItemWrapper = wrapper.tag(ref);
+        if (existingItemWrapper && (existingItemWrapper.active && (crossPos !== existingItemWrapper[cross] || mainPos !== existingItemWrapper[main]) || !existingItemWrapper.active && (renderContext["p".concat(main)] + wrapper[main] + mainPos <= viewboundMain || renderContext["p".concat(cross)] + wrapper[cross] + crossPos <= viewboundCross))) {
+          tmp = existingItemWrapper[main];
+          tcp = existingItemWrapper[cross];
+          animateItems.push(index);
+        }
+        const newItem = {
+          ref,
+          type: ItemWrapper,
+          componentIndex: index,
+          forceLoad: this._forceLoad,
+          ...sizes,
+          ["assigned".concat(main.toUpperCase())]: mainPos,
+          ["assigned".concat(cross.toUpperCase())]: crossPos,
+          [main]: tmp,
+          [cross]: tcp
+        };
+        crossPos += sizes[crossDim] + (sizes[crossMarginTo] || sizes.margin || this._crossSpacing);
+        this._lines[lineIndex].push(index);
+        cl.push(newItem);
+        return newItem;
+      });
+      wrapper.children = newChildren;
+      animateItems.forEach(index => {
+        const item = wrapper.children[index];
+        item.patch({
+          smooth: {
+            x: item.assignedX,
+            y: item.assignedY
+          }
+        });
+      });
+      const biggestInLastLine = this._getBiggestInLine(cl);
+      this._resizeWrapper({
+        [mainDim]: biggestInLastLine[main] + biggestInLastLine[mainDim],
+        [crossDim]: crossSize
+      });
+    }
+    repositionItems() {
+      const wrapper = this.wrapper;
+      if (!wrapper && wrapper.children.length) {
+        return true;
+      }
+      const {
+        main,
+        mainDim,
+        mainMarginTo,
+        mainMarginFrom,
+        cross,
+        crossDim,
+        crossMarginTo,
+        crossMarginFrom
+      } = this._getPlotProperties(this._direction);
+      const crossSize = this[crossDim];
+      let mainPos = 0,
+        crossPos = 0,
+        lineIndex = 0;
+
+      //create empty line array
+      let cl = [];
+      this.lines = [[]];
+      wrapper.children.forEach((item, index) => {
+        const sizes = this._getItemSizes(item);
+        const targetCrossFromMargin = sizes[crossMarginFrom] || sizes.margin || 0;
+        if (index === 0) {
+          mainPos += sizes[mainMarginFrom] || sizes.margin || 0;
+        }
+        if (cl.length > 0 && (this[mainDirection] > 0 && this[mainDirection] === cl.length || this[mainDirection] === 0 && crossPos + targetCrossFromMargin + sizes[crossDim] > crossSize)) {
+          const bil = this._getBiggestInLine(cl);
+          mainPos = bil[main] + bil[mainDim] + (bil[mainMarginTo] || bil.margin || this._mainSpacing);
+          crossPos = targetCrossFromMargin;
+          this._lines.push([]);
+          cl = [];
+          lineIndex++;
+        } else {
+          crossPos += targetCrossFromMargin;
+        }
+        item.patch({
+          ["assigned".concat(main.toUpperCase())]: mainPos,
+          ["assigned".concat(cross.toUpperCase())]: crossPos,
+          [main]: mainPos,
+          [cross]: crossPos
+        });
+        crossPos += sizes[crossDim] + (sizes[crossMarginTo] || sizes.margin || this._crossSpacing);
+        this._lines[lineIndex].push(index);
+        cl.push(newItem);
+      });
+      const biggestInLastLine = this._getBiggestInLine(cl);
+      this._resizeWrapper({
+        [mainDim]: biggestInLastLine[main] + biggestInLastLine[mainDim],
+        [crossDim]: crossSize
+      });
+      super.repositionItems();
+    }
+    _getBiggestInLine(line) {
+      const {
+        mainDim
+      } = this._getPlotProperties(this._direction);
+      return line.reduce((biggestItem, newItem) => {
+        if (newItem[mainDim] > biggestItem[mainDim]) {
+          return newItem;
+        }
+        return biggestItem;
+      });
+    }
+    navigate(shift, direction) {
+      const {
+        directionIsRow,
+        cross,
+        crossDim
+      } = this._getPlotProperties(this._direction);
+      const overCross = directionIsRow && direction === CollectionWrapper.DIRECTION.column || !directionIsRow && direction === CollectionWrapper.DIRECTION.row;
+      let targetMainIndex = this._mainIndex + !!!overCross * shift;
+      let targetCrossIndex = this._crossIndex + !!overCross * shift;
+      let targetIndex = this._index;
+      if (overCross && targetCrossIndex > -1 && targetCrossIndex <= this._lines[targetMainIndex].length) {
+        if (this._lines[targetMainIndex][targetCrossIndex] !== undefined) {
+          targetIndex = this._lines[targetMainIndex][targetCrossIndex];
+          this._previous = undefined;
+        }
+      } else if (!overCross && targetMainIndex < this._lines.length && targetMainIndex > -1) {
+        const targetLine = this._lines[targetMainIndex];
+        if (this._previous && this._previous.mainIndex === targetMainIndex) {
+          targetIndex = this._previous.realIndex;
+          targetCrossIndex = this._previous.crossIndex;
+        } else if (targetLine) {
+          const currentItem = this.currentItemWrapper;
+          const m = targetLine.map(item => {
+            const targetItem = this.wrapper.children[item];
+            if (targetItem[cross] <= currentItem[cross] && currentItem[cross] <= targetItem[cross] + targetItem[crossDim]) {
+              return targetItem[cross] + targetItem[crossDim] - currentItem[cross];
+            }
+            if (targetItem[cross] >= currentItem[cross] && targetItem[cross] <= currentItem[cross] + currentItem[crossDim]) {
+              return currentItem[cross] + currentItem[crossDim] - targetItem[cross];
+            }
+            return -1;
+          });
+          let acc = -1;
+          let t = -1;
+          for (let i = 0; i < m.length; i++) {
+            if (m[i] === -1 && acc > -1) {
+              break;
+            }
+            if (m[i] > acc) {
+              acc = m[i];
+              t = i;
+            }
+          }
+          if (t > -1) {
+            targetCrossIndex = t;
+            targetIndex = targetLine[t];
+          }
+        }
+        this._previous = {
+          mainIndex: this._mainIndex,
+          crossIndex: this._crossIndex,
+          realIndex: this._index
+        };
+      }
+      if (this._index !== targetIndex) {
+        this.setIndex(targetIndex);
+        return true;
+      }
+      return false;
+    }
+    set rows(num) {
+      this._rows = num;
+      this.direction = 'row';
+    }
+    get rows() {
+      return this._rows;
+    }
+    set columns(num) {
+      this._columns = num;
+      this.direction = 'column';
+    }
+    get columns() {
+      return this._columns;
+    }
+    set crossSpacing(num) {
+      this._crossSpacing = num;
+    }
+    get crossSpacing() {
+      return this._crossSpacing;
+    }
+    set mainSpacing(num) {
+      this._mainSpacing = num;
+    }
+    get mainSpacing() {
+      return this._mainSpacing;
+    }
+    set spacing(num) {
+      this._spacing = num;
+      this._mainSpacing = num;
+      this._crossSpacing = num;
+    }
+  }
 
   /*
    * If not stated otherwise in this file or this component's LICENSE file the
@@ -8822,65 +9110,365 @@ var APP_com_domain_app_boosttv = (function () {
     }
   }
 
-  let gridSize = 20;
-  const gridWidth = 1920 / gridSize;
-  const gridHeight = 1080 / gridSize;
-  class GridLayout extends Lightning$1.Component {
+  class SettingsGrid extends Lightning$1.Component {
     static _template() {
       return {
-        GridItems: {
-          w: gridSize * gridWidth,
-          h: gridSize * gridWidth,
+        w: 18 * gridWidth,
+        h: 14 * gridHeight,
+        x: gridWidth,
+        y: 4 * gridHeight,
+        List: {
           x: 0,
-          y: 0
+          y: 0 * gridHeight,
+          h: 14 * gridHeight,
+          forceLoad: true,
+          type: Grid,
+          columns: 4,
+          spacing: 0.33 * gridWidth,
+          signals: {
+            onIndexChanged: true
+          }
+        }
+        // Grid: {
+        //   x: 90,
+        //   y: 200,
+        //   w: 1740,
+        //   h: 780,
+        //   columns: 3,
+        //   scroll: 300,
+        //   spacing: 30,
+        //   itemType: ImageCell,
+        //   type: Grid,
+        // },
+      };
+    }
+
+    _setup() {
+      this._items = [{
+        icon: "network",
+        title: "Network",
+        url: pathNames.SETTINGS
+      }, {
+        icon: "Screen",
+        title: "Screen",
+        url: pathNames.SETTINGS
+      }, {
+        icon: "Power",
+        title: "Power",
+        url: pathNames.SETTINGS
+      }, {
+        icon: "myChannels",
+        title: "My Channels",
+        url: pathNames.SETTINGS
+      }, {
+        icon: "Sound",
+        title: "Sound",
+        url: pathNames.SETTINGS
+      }, {
+        icon: "channelSorting",
+        title: "Channel Sorting",
+        url: pathNames.SETTINGS
+      }, {
+        icon: "Subtitles",
+        title: "Subtitles",
+        url: pathNames.SETTINGS
+      }, {
+        icon: "TipsAndTricks",
+        title: "Tips&Tricks",
+        url: pathNames.SETTINGS
+      }, {
+        icon: "system",
+        title: "System",
+        url: pathNames.SETTINGS
+      }, {
+        icon: "restart",
+        title: "Restart the TV box",
+        url: pathNames.SETTINGS
+      }];
+      const items = this._items.map(item => {
+        return {
+          type: SettingsItem,
+          item,
+          selected: false,
+          w: 4.25 * gridWidth,
+          h: 4 * gridHeight
+        };
+      });
+      this.tag("List").add(items);
+    }
+    _getFocused() {
+      return this.tag("List");
+    }
+    _focus() {
+      // this.setSmooth("scale", 1, { delay: 0.0, duration: 0.2 });
+      // this.setSmooth("alpha", 1, { delay: 0.0, duration: 0.2 });
+      // this.setSmooth("x", 0, { delay: 0.0, duration: 0.2 });
+    }
+    _unfocus() {
+      // this.setSmooth("scale", 0.9, { delay: 0.0, duration: 0.2 });
+      // this.setSmooth("alpha", 0.001, { delay: 0.0, duration: 0.2 });
+      // this.setSmooth("x", -Menu.menuWidth, { delay: 0.0, duration: 0.2 });
+    }
+    _handleUp() {
+      return true;
+    }
+    _handleDown() {
+      return true;
+    }
+    onIndexChanged(_ref) {
+      let {
+        previousIndex = this.tag("List").index,
+        index = this._selectedIndex
+      } = _ref;
+      console.log(previousIndex);
+      if (this.active && previousIndex !== index) {
+        console.log("INDEX HAS BEEN CHANGED");
+      }
+    }
+  }
+  class SettingsItem extends Lightning$1.Component {
+    static _template() {
+      return {
+        h: 4 * gridHeight,
+        w: 4 * gridWidth,
+        Border: {
+          visible: true,
+          h: 4 * gridHeight - 4,
+          w: 4 * gridWidth - 4,
+          texture: Lightning$1.Tools.getRoundRect(4 * gridWidth - 4, 4 * gridHeight - 4, 20, 2, 0xff454545, false, null)
+        },
+        Title: {
+          w: 4 * gridWidth,
+          h: gridHeight,
+          y: 2.75 * gridHeight,
+          color: 0xffffffff,
+          text: {
+            text: "",
+            textAlign: "center",
+            fontFace: "Semibold",
+            fontSize: 26
+          }
+        },
+        Icon: {
+          x: 1.5 * gridWidth,
+          y: 0.75 * gridHeight,
+          w: 1 * gridWidth,
+          h: 1 * gridWidth
         }
       };
     }
-    _setup() {
-      let gridNodes = [];
-      for (let i = 0; i < gridSize; i++) {
-        gridNodes.push({
-          type: GridItemVertical,
-          i
-        });
-        gridNodes.push({
-          type: GridItemHorisontal,
-          i
-        });
-      }
-      this.tag("GridItems").children = gridNodes;
-    }
-  }
-  class GridItemVertical extends Lightning$1.Component {
-    static _template() {
-      return {
-        w: 1,
-        h: 1080,
-        color: 0xff39ff14,
-        rect: true
-      };
-    }
-    _setup() {
+    _firstActive() {
       this.patch({
-        x: (this.i + 1) * gridWidth
+        Icon: {
+          src: Utils.asset("images/icons/settings/".concat(this.item.icon, ".png"))
+        },
+        Title: {
+          text: this.item.title
+        }
       });
     }
-  }
-  class GridItemHorisontal extends Lightning$1.Component {
-    static _template() {
-      return {
-        w: 1920,
-        h: 1,
-        color: 0xff39ff14,
-        rect: true
-      };
-    }
-    _setup() {
-      this.patch({
-        y: (this.i + 1) * gridHeight
+    _focus() {
+      this.setSmooth("scale", 1.1, {
+        delay: 0.0,
+        duration: 0.2
       });
     }
+    _unfocus() {
+      this.setSmooth("scale", 1, {
+        delay: 0.0,
+        duration: 0.2
+      });
+    }
+    _handleEnter() {
+      Router.navigate(this.item.url, true);
+      Router.focusPage();
+      return true;
+    }
+    set selected(bool) {
+      this.alpha = bool ? 1 : 0.8;
+      this._selected = bool;
+    }
+    get selected() {
+      return this._selected;
+    }
+    static get width() {
+      return 4 * gridWidth;
+    }
+    static get height() {
+      return 4 * gridHeight;
+    }
   }
+
+  /**
+   * Copyright 2021 Comcast Cable Communications Management, LLC
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   * http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   *
+   * SPDX-License-Identifier: Apache-2.0
+   */
+  class Splash extends Lightning$1.Component {
+    static _template() {
+      return {
+        Background: {
+          type: PageBackground
+        }
+      };
+    }
+    _init() {
+      setTimeout(() => {
+        Router.resume();
+      }, 1000);
+    }
+  }
+
+  /**
+   * Copyright 2021 Comcast Cable Communications Management, LLC
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   * http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   *
+   * SPDX-License-Identifier: Apache-2.0
+   */
+  class Main extends Lightning$1.Component {
+    static _template() {
+      return {};
+    }
+    _handleLeft() {
+      Router.focusWidget("menu");
+    }
+  }
+
+  /**
+   * Copyright 2021 Comcast Cable Communications Management, LLC
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   * http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   *
+   * SPDX-License-Identifier: Apache-2.0
+   */
+  class Settings extends Lightning$1.Component {
+    static _template() {
+      return {
+        Background: {
+          type: PageBackground
+        },
+        Logo: {
+          type: Logo
+        },
+        SettingsGrid: {
+          type: SettingsGrid
+        }
+      };
+    }
+    _handleLeft() {
+      Router.focusWidget("Menu");
+    }
+    _getFocused() {
+      return this.tag("SettingsGrid");
+    }
+  }
+
+  /**
+   * Copyright 2021 Comcast Cable Communications Management, LLC
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License");
+   * you may not use this file except in compliance with the License.
+   * You may obtain a copy of the License at
+   *
+   * http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS,
+   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   * See the License for the specific language governing permissions and
+   * limitations under the License.
+   *
+   * SPDX-License-Identifier: Apache-2.0
+   */
+  const pathNames = {
+    HOME: "home",
+    SEARCH: "search",
+    TV: "tv",
+    MOVIES: "movies",
+    SERIES: "series",
+    KIDS: "kids",
+    CHANNELS: "channels",
+    PROFILE: "profile",
+    SETTINGS: "settings"
+  };
+  const routes = [{
+    path: pathNames.SEARCH,
+    component: Main,
+    widgets: ["Menu", "Grid"]
+  }, {
+    path: pathNames.TV,
+    component: Main,
+    widgets: ["Menu", "Grid"]
+  }, {
+    path: pathNames.MOVIES,
+    component: Main,
+    widgets: ["Menu", "Grid"]
+  }, {
+    path: pathNames.SERIES,
+    component: Main,
+    widgets: ["Menu", "Grid"]
+  }, {
+    path: pathNames.KIDS,
+    component: Main,
+    widgets: ["Menu", "Grid"]
+  }, {
+    path: pathNames.CHANNELS,
+    component: Main,
+    widgets: ["Menu", "Grid"]
+  }, {
+    path: pathNames.PROFILE,
+    component: Main,
+    widgets: ["Menu", "Grid"]
+  }, {
+    path: pathNames.SETTINGS,
+    component: Settings,
+    widgets: ["Menu", "Grid"]
+  }, {
+    path: pathNames.HOME,
+    component: Main,
+    widgets: ["Menu", "Grid"]
+  }, {
+    path: "$",
+    component: Splash,
+    widgets: ["Grid"]
+  }];
+  var routerConfig = {
+    root: routes[0].path,
+    routes
+  };
 
   class Menu extends Lightning$1.Component {
     static _template() {
@@ -8893,13 +9481,7 @@ var APP_com_domain_app_boosttv = (function () {
         colorTop: 0xff0c4d33,
         colorBottom: 0xff191919,
         Logo: {
-          rect: true,
-          color: "0xffffffff",
-          w: 2 * gridWidth,
-          h: 1 * gridWidth,
-          x: gridWidth,
-          y: gridHeight,
-          src: Utils.asset("images/logo.png")
+          type: Logo
         },
         List: {
           x: 0,
@@ -9065,6 +9647,7 @@ var APP_com_domain_app_boosttv = (function () {
     }
     _handleEnter() {
       Router.navigate(this.item.url, true);
+      Router.focusPage();
       return true;
     }
     set selected(bool) {

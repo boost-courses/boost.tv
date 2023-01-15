@@ -16,6 +16,29 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export { default as Splash } from "./Splash/Splash.js";
-export { default as Main } from "./Main/Main.js";
-export { default as Settings } from "./Settings/Settings.js";
+import { Lightning, Router } from "@lightningjs/sdk";
+import { Logo, PageBackground, SettingsGrid } from "../../components";
+
+export default class Settings extends Lightning.Component {
+  static _template() {
+    return {
+      Background: {
+        type: PageBackground,
+      },
+      Logo: {
+        type: Logo,
+      },
+      SettingsGrid: {
+        type: SettingsGrid,
+      },
+    };
+  }
+
+  _handleLeft() {
+    Router.focusWidget("Menu");
+  }
+
+  _getFocused() {
+    return this.tag("SettingsGrid");
+  }
+}

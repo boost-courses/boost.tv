@@ -1,5 +1,6 @@
 import { Lightning, Router, Utils } from "@lightningjs/sdk";
 import { List } from "@lightningjs/ui";
+import { Logo } from "../components";
 import { pathNames } from "../lib/routerConfig";
 import { gridHeight, gridWidth } from "./GridLayout";
 
@@ -14,13 +15,7 @@ export default class Menu extends Lightning.Component {
       colorTop: 0xff0c4d33,
       colorBottom: 0xff191919,
       Logo: {
-        rect: true,
-        color: "0xffffffff",
-        w: 2 * gridWidth,
-        h: 1 * gridWidth,
-        x: gridWidth,
-        y: gridHeight,
-        src: Utils.asset("images/logo.png"),
+        type: Logo,
       },
       List: {
         x: 0,
@@ -179,6 +174,7 @@ class MenuItem extends Lightning.Component {
 
   _handleEnter() {
     Router.navigate(this.item.url, true);
+    Router.focusPage();
     return true;
   }
 
